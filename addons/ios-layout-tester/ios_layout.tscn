@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://dkn116l1ajlok"]
+
+[ext_resource type="Script" uid="uid://dd08fr65mtloq" path="res://addons/ios-layout-tester/ios_layout.gd" id="1_gf5ms"]
+[ext_resource type="Script" uid="uid://6eym1cftsqef" path="res://addons/ios-layout-tester/dynamic_island.gd" id="2_id1jk"]
+[ext_resource type="Script" uid="uid://bag7s18ulogr4" path="res://addons/ios-layout-tester/screen_corners.gd" id="3_d6hrt"]
+[ext_resource type="Shader" uid="uid://cpedwpirdu2ms" path="res://addons/ios-layout-tester/invert.gdshader" id="3_ktu6w"]
+[ext_resource type="Script" uid="uid://dvn02o7tcm8m1" path="res://addons/ios-layout-tester/notch.gd" id="4_jqt58"]
+[ext_resource type="Script" uid="uid://ijvafy10e6mq" path="res://addons/ios-layout-tester/safe_areas.gd" id="6_gtsj3"]
+[ext_resource type="Theme" uid="uid://dnpwp161ikd7b" path="res://addons/ios-layout-tester/ios_layout.tres" id="8_717vi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ktu6w"]
+shader = ExtResource("3_ktu6w")
+
+[node name="iOSLayout" type="CanvasLayer"]
+script = ExtResource("1_gf5ms")
+
+[node name="SafeAreas" type="Node2D" parent="."]
+script = ExtResource("6_gtsj3")
+
+[node name="DynamicIsland" type="Node2D" parent="."]
+script = ExtResource("2_id1jk")
+
+[node name="Notch" type="Node2D" parent="."]
+script = ExtResource("4_jqt58")
+
+[node name="ScreenCorners" type="Node2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_ktu6w")
+script = ExtResource("3_d6hrt")
+
+[node name="Toolbar" type="PanelContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -113.0
+offset_right = 356.0
+grow_vertical = 0
+theme = ExtResource("8_717vi")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Toolbar"]
+layout_mode = 2
+theme = ExtResource("8_717vi")
+
+[node name="IslandButton" type="Button" parent="Toolbar/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_717vi")
+text = "Big Island"
+
+[node name="OptionButton" type="OptionButton" parent="Toolbar/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("8_717vi")
+item_count = 1
+popup/item_0/text = "Test"
+popup/item_0/id = 0
+
+[node name="OrientationButton" type="Button" parent="Toolbar/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_717vi")
+text = "Orientation"
+
+[connection signal="pressed" from="Toolbar/HBoxContainer/IslandButton" to="." method="_on_button_pressed"]
+[connection signal="item_selected" from="Toolbar/HBoxContainer/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="pressed" from="Toolbar/HBoxContainer/OrientationButton" to="." method="_on_orientation_button_pressed"]
