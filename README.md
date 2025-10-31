@@ -9,6 +9,6 @@ Simply install the addon and then add a new node of type XXX to the root of your
 
 The buttons at the bottom of the screen allow you to switch between different device dimensions and screen orientations.
 
-Apple "safe areas" are shown with transparent pink shading. Dynamic island, notch adn screen corners are shown for each screen layout.
+Apple "safe areas" are shown with transparent pink shading. Dynamic island, notch and screen corners are shown for each screen layout.
 
 Demo project: https://github.com/iamcal/godot-ios-layout-tester-example
